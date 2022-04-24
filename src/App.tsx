@@ -12,7 +12,7 @@ import NewsCard from './components/NewsCard';
 import loadingSpinner from './images/loadingSpinner.svg';
 
 const App: React.FC = () => {
-  const [searchQuery, setSearchQuery] = useState<string>('');
+  const [searchQuery, setSearchQuery] = useState<string>('Bitcoin');
   const [error, setError] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const [newsArticleList, setNewsArticleList] =

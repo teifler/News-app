@@ -6,6 +6,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   :root{
+    --font-color-black: #000000;
     --bg-color-grey: #f4f4f4;
   }
 
