@@ -5,12 +5,18 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
   }
 
-  body {   background: linear-gradient(
-    to right,
-    #eaeaea,
-    #dbdbdb,
-    #f2f2f2,
-)}
+  :root{
+    --font-color-black: #000000;
+    --bg-color-grey: #f4f4f4;
+    --font-color-red:#cc0000;
+  }
+
+  body {
+    font-family: 'Noticia Text', serif;
+    background: linear-gradient(
+    to right,#eaeaea,#dbdbdb,#f2f2f2,
+    );
+  }
 
 `;
 
