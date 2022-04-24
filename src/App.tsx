@@ -36,14 +36,13 @@ const App: React.FC = () => {
     fetchNews();
   }, [searchQuery]);
 
-  console.log(newsArticleList);
   return (
     <div className="App">
       <Header>News App</Header>
       {error && (
-        <h3>
+        <ErrorMessage>
           Please reload the page there was an error while fetching the data
-        </h3>
+        </ErrorMessage>
       )}
       <SearchInputForm setSearchQuery={setSearchQuery} />
       {loading && (
@@ -81,6 +80,12 @@ export default App;
 
 const Header = styled.h1`
   text-align: center;
+`;
+
+const ErrorMessage = styled.div`
+  color: var(--font-color-red);
+  text-align: center;
+  margin-bottom: 1rem;
 `;
 
 const ArticleList = styled.div`
