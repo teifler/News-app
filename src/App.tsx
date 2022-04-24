@@ -2,17 +2,21 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
-import { EverythingRootObject } from './interfaces/everyting_interface';
+import {
+  EverythingRootObject,
+  Article,
+} from './interfaces/everyting_interface';
 import SearchInputForm from './components/SearchInputForm';
+import NewsCard from './components/NewsCard';
+
 import loadingSpinner from './images/loadingSpinner.svg';
 
 const App: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [error, setError] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
-  const [newsArticleList, setNewsArticleList] = useState<
-    EverythingRootObject[]
-  >([]);
+  const [newsArticleList, setNewsArticleList] =
+    useState<EverythingRootObject | null>(null);
 
   useEffect(() => {
     const fetchNews = async () => {
@@ -21,8 +25,8 @@ const App: React.FC = () => {
         const response = await fetch(
           `https://newsapi.org/v2/everything?q=${searchQuery}&apiKey=${process.env.REACT_APP_API_KEY}`
         );
-        const { articles } = await response.json();
-        setNewsArticleList(articles);
+        const data = await response.json();
+        setNewsArticleList(data);
       } catch (error) {
         setError(true);
         setLoading(false);
@@ -33,7 +37,6 @@ const App: React.FC = () => {
   }, [searchQuery]);
 
   console.log(newsArticleList);
-
   return (
     <div className="App">
       <Header>News App</Header>
@@ -53,6 +56,13 @@ const App: React.FC = () => {
           ></img>
         </LoadingContainer>
       )}
+      <ArticleList role="list">
+        {newsArticleList?.articles?.map((article: Article) => (
+          <ArticleListElement key={article.title}>
+            <NewsCard article={article} />
+          </ArticleListElement>
+        ))}
+      </ArticleList>
     </div>
   );
 };
@@ -71,4 +81,14 @@ export default App;
 
 const Header = styled.h1`
   text-align: center;
+`;
+
+const ArticleList = styled.div`
+  margin-top: 3.5rem;
+  list-style: none;
+`;
+
+const ArticleListElement = styled.div`
+  display: flex;
+  justify-content: center;
 `;
