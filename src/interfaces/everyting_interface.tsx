@@ -19,3 +19,7 @@ export interface EverythingRootObject {
   totalResults: number;
   articles: Article[];
 }
+
+export interface States {
+  setSearchQuery: (arg0: string) => Promise<void>;
+}

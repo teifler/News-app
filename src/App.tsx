@@ -3,12 +3,12 @@ import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 import { EverythingRootObject } from './interfaces/everyting_interface';
-
+import SearchInputForm from './components/SearchInputForm';
 import loadingSpinner from './images/loadingSpinner.svg';
 
 const App: React.FC = () => {
   //const API_KEY: string = '6e769055c0fa4086924abb5f8af1bc8a';
-  const [searchQuery, setSearchQuery] = useState<String>('bitcoin');
+  const [searchQuery, setSearchQuery] = useState<string>('');
   const [error, setError] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const [newsArticleList, setNewsArticleList] = useState<
@@ -36,21 +36,24 @@ const App: React.FC = () => {
 
   console.log(newsArticleList);
 
-  if (loading) {
-    return (
-      <LoadingContainer>
-        <img src={loadingSpinner} alt="loading..." height="80" width="80"></img>
-      </LoadingContainer>
-    );
-  }
-
   return (
     <div className="App">
-      <h1>News</h1>
+      <Header>News App</Header>
       {error && (
         <h3>
           Please reload the page there was an error while fetching the data
         </h3>
+      )}
+      <SearchInputForm setSearchQuery={setSearchQuery} />
+      {loading && (
+        <LoadingContainer>
+          <img
+            src={loadingSpinner}
+            alt="loading..."
+            height="80"
+            width="80"
+          ></img>
+        </LoadingContainer>
       )}
     </div>
   );
@@ -67,3 +70,7 @@ const LoadingContainer = styled.div`
 `;
 
 export default App;
+
+const Header = styled.h1`
+  text-align: center;
+`;
