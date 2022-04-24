@@ -7,14 +7,12 @@ import SearchInputForm from './components/SearchInputForm';
 import loadingSpinner from './images/loadingSpinner.svg';
 
 const App: React.FC = () => {
-  //const API_KEY: string = '6e769055c0fa4086924abb5f8af1bc8a';
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [error, setError] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const [newsArticleList, setNewsArticleList] = useState<
     EverythingRootObject[]
   >([]);
-  //const url: string = `https://newsapi.org/v2/everything?q=${searchQuery}&apiKey=${API_KEY}`;
 
   useEffect(() => {
     const fetchNews = async () => {
