@@ -84,8 +84,12 @@ const Header = styled.h1`
 `;
 
 const ArticleList = styled.div`
-  margin-top: 3.5rem;
+  margin-top: 2.5rem;
   list-style: none;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
 `;
 
 const ArticleListElement = styled.div`

@@ -2,8 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import { Article } from '../interfaces/everyting_interface';
 
-//ADD ROOT OBJECTS TO FUNCTION
-const NewsCard: React.FC<{ article: Article }> = ({ article }) => {
+interface NewsCardProps {
+  article: Article;
+}
+
+const NewsCard: React.FC<NewsCardProps> = ({ article }) => {
   return (
     <Container>
       <ImageContainer>
@@ -19,12 +22,11 @@ const NewsCard: React.FC<{ article: Article }> = ({ article }) => {
           <p>{article.author}</p>
           <p>{new Date(article.publishedAt).toLocaleDateString('de-DE')}</p>
         </Overlines>
-        <Headline>
-          <p>{article.title}</p>
-        </Headline>
+        <Headline>{article.title}</Headline>
+        <p>{article.description}</p>
         <Underlines>
           <a href={article.url}>
-            <p>Source: {article.source.name}</p>
+            Read the full acticle on {article.source.name}
           </a>
         </Underlines>
       </ArticleDescription>
@@ -38,7 +40,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: 350px;
-  margin-bottom: 2rem;
+  margin: 2rem;
   background-color: var(--bg-color-grey);
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.15), 0 10px 10px rgba(0, 0, 0, 0.1);
 `;
@@ -48,7 +50,6 @@ const ImageContainer = styled.div``;
 const ArticleDescription = styled.div`
   font-size: 0.8rem;
   padding: 0.5rem 1rem 1rem 1rem;
-  letter-spacing: 1.5px;
 `;
 
 const Overlines = styled.div`
