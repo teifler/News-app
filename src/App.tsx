@@ -32,18 +32,13 @@ const App: React.FC = () => {
   }
 
   const changePage = (selectedItem: { selected: number }): void => {
-    console.log('SELECTED', selectedItem.selected + 1);
     setPageNumber(selectedItem.selected + 1);
   };
 
-  console.log(pageCount);
   useEffect(() => {
     const fetchNews = async () => {
       try {
         setLoading(true);
-        console.log(
-          `https://newsapi.org/v2/everything?q=${searchQuery}&pageSize=${acticleNumbers}&page=${pageNumber}&apiKey=${process.env.REACT_APP_API_KEY}`
-        );
         const response = await fetch(
           `https://newsapi.org/v2/everything?q=${searchQuery}&pageSize=${acticleNumbers}&page=${pageNumber}&apiKey=${process.env.REACT_APP_API_KEY}`
         );
@@ -58,8 +53,6 @@ const App: React.FC = () => {
     };
     fetchNews();
   }, [searchQuery, acticleNumbers, pageNumber]);
-
-  console.log(newsArticleList);
 
   return (
     <div className="App">
