@@ -8,6 +8,8 @@ const GlobalStyle = createGlobalStyle`
   :root{
     --font-color-black: #000000;
     --bg-color-grey: #f4f4f4;
+    --bg-color-grey-dropdown: #4d5061;
+    --bg-color-grey-arrow: #3b3c47;
     --font-color-red:#cc0000;
   }
 
