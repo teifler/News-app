@@ -8,11 +8,12 @@ import {
 } from './interfaces/everyting_interface';
 import SearchInputForm from './components/SearchInputForm';
 import NewsCard from './components/NewsCard';
-
+import ArticleNumberDropdown from './components/ArticleNumberDropdown';
 import loadingSpinner from './images/loadingSpinner.svg';
 
 const App: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState<string>('Bitcoin');
+  const [acticleNumbers, setActicleNumbers] = useState<string>('10');
   const [error, setError] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const [newsArticleList, setNewsArticleList] =
@@ -23,7 +24,7 @@ const App: React.FC = () => {
       try {
         setLoading(true);
         const response = await fetch(
-          `https://newsapi.org/v2/everything?q=${searchQuery}&apiKey=${process.env.REACT_APP_API_KEY}`
+          `https://newsapi.org/v2/everything?q=${searchQuery}&pageSize=${acticleNumbers}&page=1&apiKey=${process.env.REACT_APP_API_KEY}`
         );
         const data = await response.json();
         setNewsArticleList(data);
@@ -34,17 +35,23 @@ const App: React.FC = () => {
       setLoading(false);
     };
     fetchNews();
-  }, [searchQuery]);
+  }, [searchQuery, acticleNumbers]);
 
   return (
     <div className="App">
       <Header>News App</Header>
+
       {error && (
         <ErrorMessage>
           Please reload the page there was an error while fetching the data
         </ErrorMessage>
       )}
+
       <SearchInputForm setSearchQuery={setSearchQuery} />
+      <DropdownContainer>
+        <ArticleNumberDropdown setActicleNumbers={setActicleNumbers} />
+      </DropdownContainer>
+
       {loading && (
         <LoadingContainer>
           <img
@@ -66,30 +73,35 @@ const App: React.FC = () => {
   );
 };
 
+export default App;
+
+const Header = styled.h1`
+  text-align: center;
+  background-color: #4d5061;
+  border: 1px solid #3b3c47;
+`;
+
+const DropdownContainer = styled.div`
+  display: flex;
+  margin-top: 1rem;
+  justify-content: center;
+`;
+
 const LoadingContainer = styled.div`
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  transform: -webkit-translate(-50%, -50%);
-  transform: -moz-translate(-50%, -50%);
-  transform: -ms-translate(-50%, -50%);
 `;
 
-export default App;
-
-const Header = styled.h1`
-  text-align: center;
-`;
-
-const ErrorMessage = styled.div`
+const ErrorMessage = styled.p`
   color: var(--font-color-red);
   text-align: center;
   margin-bottom: 1rem;
 `;
 
 const ArticleList = styled.div`
-  margin-top: 2.5rem;
+  margin-top: 2rem;
   list-style: none;
   display: flex;
   justify-content: center;

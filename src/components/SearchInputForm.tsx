@@ -84,5 +84,6 @@ const SubmitButton = styled.button`
 `;
 
 const SearchValidationError = styled.p`
+  text-align: center;
   color: var(--font-color-red);
 `;
