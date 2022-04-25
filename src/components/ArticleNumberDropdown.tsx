@@ -1,17 +1,17 @@
 import styled from 'styled-components';
 
 const ArticleNumberDropdown: React.FC<{
-  setActicleNumbers: (arg0: string) => void;
+  setActicleNumbers: (arg0: number) => void;
 }> = ({ setActicleNumbers }) => {
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setActicleNumbers(e.target.value);
+    setActicleNumbers(parseInt(e.target.value));
   };
 
   return (
     <Container>
       <label htmlFor="Article numbers">
         <SelectDropdown
-          defaultValue={'10'}
+          defaultValue={10}
           aria-label="Adjust article number"
           id="Article numbers"
           onChange={handleChange}
@@ -19,9 +19,9 @@ const ArticleNumberDropdown: React.FC<{
           <option value="DEFAULT" disabled>
             Articles on pages
           </option>
-          <option value="5">5 Articles</option>
-          <option value="10">10 Articles</option>
-          <option value="20">20 Articles</option>
+          <option value={5}>5 Articles</option>
+          <option value={10}>10 Articles</option>
+          <option value={20}>20 Articles</option>
         </SelectDropdown>
         <Arrow></Arrow>
       </label>
@@ -39,7 +39,7 @@ const Container = styled.div`
 const SelectDropdown = styled.select`
   font-size: 1rem;
   padding: 0.3rem 0.9rem 0.3rem 0.3rem;
-  background: var(--bg-color-grey-dropdown);
+  background: var(--bg-color-dark-grey);
   color: white;
   border: 0;
 `;
