@@ -25,7 +25,7 @@ const NewsCard: React.FC<NewsCardProps> = ({ article }) => {
         <Headline>{article.title}</Headline>
         <p>{article.description}</p>
         <Underlines>
-          <a href={article.url}>
+          <a href={article.url} target="_blank" rel="noreferrer">
             Read the full acticle on {article.source.name}
           </a>
         </Underlines>
